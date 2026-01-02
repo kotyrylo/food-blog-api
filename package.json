@@ -1,13 +1,13 @@
 {
   "name": "culinary-blog-api",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
   },
   "keywords": [],
-  "author": "",
+  "author": "kotyrylo",
   "license": "ISC",
   "description": "",
   "dependencies": {
