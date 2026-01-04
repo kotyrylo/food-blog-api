@@ -2,11 +2,15 @@ const fastify = require("fastify")({logger: true});
 const data = require("./db_moc");
 
 // get
-fastify.get("/users", async () => {
+fastify.get("/users", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "GET");
     return data.users
 })
 
 fastify.get("/user/:id", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "GET");
     let id = request.params.id;
     
     if (id) {
@@ -22,11 +26,16 @@ fastify.get("/user/:id", async (request, reply) => {
     }
 })
 
-fastify.get("/posts", async () => {
+fastify.get("/posts", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "POST");
+    
     return data.posts
 })
 
 fastify.get("/post/:id", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "GET");
     let id = request.params.id;
     
     if (id) {
@@ -42,6 +51,8 @@ fastify.get("/post/:id", async (request, reply) => {
 })
 
 fastify.get("/posts/user/:id", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "GET");
     let authorId = request.params.id;
     
     if (authorId) {
@@ -57,14 +68,18 @@ fastify.get("/posts/user/:id", async (request, reply) => {
 })
 
 // post
-fastify.post("/user", async (request) => {
+fastify.post("/user", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "POST");
 
     // add check for existed user
 
     data.users.push(request.body)
 })
 
-fastify.post("/post", async (request) => {
+fastify.post("/post", async (request, reply) => {
+    reply.header("Access-Control-Allow-Origin", "*");
+    reply.header("Access-Control-Allow-Methods", "POST");
 
     // add check for existed post add validation
 
@@ -73,7 +88,7 @@ fastify.post("/post", async (request) => {
 
 const start = async () => {
     try {
-        fastify.listen({port: 3000})
+        fastify.listen({port: 3001})
     } catch (error) {
         fastify.log.error(error)
         process.exit(1)
